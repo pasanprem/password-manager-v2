@@ -44,7 +44,7 @@ def save():
                 # json.dump(new_data, data_file, indent=4)
                 data = json.load(data_file)
                 data.update(new_data)
-        except FileNotFoundError:
+        except (FileNotFoundError, json.decoder.JSONDecodeError):
             data = new_data
 
         with open("data.json", "w") as data_file:
@@ -52,6 +52,28 @@ def save():
 
             website_entry.delete(0, END)
             password_entry.delete(0, END)
+
+# ------------------------ Password Search ----------------------------- #
+
+def find_password():
+    site = website_entry.get()
+    try:
+        with open("data.json","r") as data_file:
+            # if data_file["site"]
+            # print(value for key:value in data_file where (key == 'site'))
+            data = json.load(data_file)
+            if site in data:
+                # print( {data[site]["password"]})
+                # NEED TO DO THE POP UP WITH THE EMAIL AND PASSWORD
+                email_ = {data[site]["email"]}
+                pass_ = {data[site]["password"]}
+                out_ = f"Email: {email_} \n Password: {pass_}"
+                messagebox.showinfo(title="A login exists", message=out_)
+            else:
+                print("Entry not found")
+    except KeyError as keyerror:
+        print(f"The KeyError is {keyerror}")
+    # DO THE EXCEPTION FOR FILE NOT FOUND
 
 
 # ---------------------------- UI SETUP ------------------------------- #
@@ -88,5 +110,7 @@ generate_password_button = Button(text="Generate Password", command=generate_pas
 generate_password_button.grid(row=3, column=2)
 add_button = Button(text="Add", width=36, command=save)
 add_button.grid(row=4, column=1, columnspan=2)
+search_button = Button(text="Search", command=find_password)
+search_button.grid(row=1, column=2)
 
 window.mainloop()
