@@ -70,10 +70,12 @@ def find_password():
                 out_ = f"Email: {email_} \n Password: {pass_}"
                 messagebox.showinfo(title="A login exists", message=out_)
             else:
-                print("Entry not found")
-    except KeyError as keyerror:
-        print(f"The KeyError is {keyerror}")
+                messagebox.showinfo(title="Not found!", message="No details for the website exists.")
+    # except KeyError as keyerror:
+    #     print(f"The KeyError is {keyerror}")
     # DO THE EXCEPTION FOR FILE NOT FOUND
+    except FileNotFoundError:
+        messagebox.showinfo(title="Not data file!", message="No data file found.")
 
 
 # ---------------------------- UI SETUP ------------------------------- #
