@@ -71,7 +71,7 @@ def find_password():
                 messagebox.showinfo(title="A login exists", message=out_)
             else:
                 messagebox.showinfo(title="Not found!", message="No details for the website exists.")
-    # except KeyError as keyerror:
+    # except KeyError as keyerror:  ## DON'T THINK THIS IS NEEDED AS THERE  IS A CHECK ABOVE
     #     print(f"The KeyError is {keyerror}")
     # DO THE EXCEPTION FOR FILE NOT FOUND
     except FileNotFoundError:
